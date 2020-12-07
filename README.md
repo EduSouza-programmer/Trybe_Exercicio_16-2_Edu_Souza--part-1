@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Exercício 16-2: Usando o Redux no React - Concluído o/ o/ o/ :star:
+  Exercício 16-2: Usando o Redux no React--part-1 - Concluído o/ o/ o/ :star:
 </h3>
 
 <blockquote align="center">“Quanto mais você estuda, mais aprende e se aproxima de realizar seu sonhos!”</blockquote>
@@ -193,7 +193,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TrafficSignal);
 
 <p align="right">
    <a href="https://edusouza-programmer.github.io/Trybe_Exercicio_3-3_Edu_Souza//parte-1/challenge_1-o_modelo_boxer.html">
-    <img alt="Go index.html" src="https://img.shields.io/badge/Go-index.html-orange">
+    <img alt="Go index.html" src="https://img.shields.io/badge/Go-app_react-orange">
     </a>&nbsp;
     <a href="#clipboard-Sumário">
     <img alt="Back Sumário" src="https://img.shields.io/badge/Back-Sum%C3%A1rio-orange">
