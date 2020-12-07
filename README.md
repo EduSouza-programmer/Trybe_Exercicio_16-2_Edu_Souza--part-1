@@ -42,8 +42,8 @@ A maioria das bibliotecas, como React , Angular etc, possuem uma forma interna d
 Você irá desenvolver 3 exercícios para solidificar seus conhecimentos de Redux com React.
 
 - No primeiro exercício, desenvolveremos um semáforo simples.
-- No segundo trabalharemos com mais estados aplicando movimento em 3 carros.
-- E para finalizar iremos combinar ambos os exercícios em um só, utilizando o combineReducers .
+- No segundo trabalharemos com mais estados aplicando movimento em 3 carros, [veja parte 2.](https://github.com/EduSouza-programmer/Trybe_Exercicio_16-2_Edu_Souza--part-2)
+- E para finalizar iremos combinar ambos os exercícios em um só, utilizando o combineReducers, [veja parte 3.]()
 
 ### :clipboard: Sumário
 
