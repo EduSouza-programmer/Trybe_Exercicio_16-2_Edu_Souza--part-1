@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Exercício 8-2: JS_ES6 - Higher Order Functions--map, filter - Concluído o/ o/ o/ :star:
+  Exercício 16-2: Usando o Redux no React - Concluído o/ o/ o/ :star:
 </h3>
 
 <blockquote align="center">“Quanto mais você estuda, mais aprende e se aproxima de realizar seu sonhos!”</blockquote>
@@ -34,17 +34,30 @@
 
 # :rocket: Sobre o Exercício
 
-Nos exercícios a seguir, você trabalhará com uma estrutura de dados representando uma lista de livros, contendo informações como nome do livro, gênero, pessoa autora do livro e data de lançamento.
+Redux é uma ferramenta para gerenciar o estado de uma aplicação JavaScript . Antes de entender o porquê de utilizar React com Redux , deve-se entender o porquê de utilizarmos uma biblioteca externa para controlar e gerenciar o estado de uma aplicação.
+A maioria das bibliotecas, como React , Angular etc, possuem uma forma interna de gerenciar o estado da aplicação sem o auxílio ou necessidade de uma ferramenta externa. Isto funciona bem para aplicações que possuem poucos componentes mas, à medida que a aplicação cresce, o gerenciamento de estados compartilhados entre componentes torna-se uma tarefa complicada e desgastante.
 
 # :postbox: Entrega
 
+Você irá desenvolver 3 exercícios para solidificar seus conhecimentos de Redux com React.
+
+- No primeiro exercício, desenvolveremos um semáforo simples.
+- No segundo trabalharemos com mais estados aplicando movimento em 3 carros.
+- E para finalizar iremos combinar ambos os exercícios em um só, utilizando o combineReducers .
+
 ### :clipboard: Sumário
 
-- <p><a href="#1"> :pushpin: 1.</a> Crie um array com strings no formato NOME_DO_LIVRO - GÊNERO_DO_LIVRO - NOME_DA_PESSOA_AUTORA;</p>
+- <p><a href="#1"> :pushpin: 1.</a> Primeiro exercício, desenvolveremos um semáforo simples;</p>
 
 ## :books: Exercícios
 
 ### 1°
+
+Como primeira tarefa, você deve usar o **Redux** para gerenciar o estado do componente `TrafficSignal`. As funções `mapStateToProps` e `mapDispatchToProps` devem ser usadas para conectar o componente ao estado do **Redux**.
+
+A função `renderSignal` retorna o src da imagem do sinal de trânsito e recebe como parâmetro uma string que deve vir da store.
+
+O componente `TrafficSignal` tem três botões e ao clique de cada um deles, a sua respectiva luz deve acender.
 
 #### Resposta:
 
@@ -52,7 +65,128 @@ Nos exercícios a seguir, você trabalhará com uma estrutura de dados represent
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+// src/index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import App from "./App";
+import store from "./redux";
 
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+/* ----------- */
+
+// src/app.jsx
+import React from "react";
+import TrafficSignal from "./TrafficSignal";
+import "./App.css";
+
+export default function App() {
+  return <TrafficSignal />;
+}
+
+/* ----------- */
+
+// redux/actionCreators.js
+export const CHANGE_SIGNAL = "CHANGE_SIGNAL";
+
+export const changeSignal = (payload) => ({
+  type: CHANGE_SIGNAL,
+  payload,
+});
+
+/* ----------- */
+
+// redux/index.js
+import { createStore } from "redux";
+import { CHANGE_SIGNAL } from "./actionCreators";
+
+const initialState = {
+  signal: {
+    color: "red",
+  },
+};
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case CHANGE_SIGNAL:
+      return { ...state, signal: { ...state.signal, color: action.payload } };
+    default:
+      return state;
+  }
+}
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+export default store;
+
+/* ----------- */
+
+// src/TrafficSignal.jsx
+import React from "react";
+import { func, string } from "prop-types";
+import { connect } from "react-redux";
+import { changeSignal } from "./redux/actionCreators";
+import redSignal from "./images/redSignal.jpeg";
+import greenSignal from "./images/greenSignal.jpeg";
+import yellowSignal from "./images/yellowSignal.jpeg";
+
+const renderSignal = (signalColor) => {
+  if (signalColor === "red") {
+    return redSignal;
+  }
+  if (signalColor === "green") {
+    return greenSignal;
+  }
+  if (signalColor === "yellow") {
+    return yellowSignal;
+  }
+  return null;
+};
+
+function TrafficSignal({ signalColor, changeSignal }) {
+  return (
+    <div className="ctn">
+      <div className="button-container">
+        <button onClick={() => changeSignal("red")} type="button">
+          Red
+        </button>
+        <button onClick={() => changeSignal("yellow")} type="button">
+          Yellow
+        </button>
+        <button onClick={() => changeSignal("green")} type="button">
+          Green
+        </button>
+      </div>
+      <img className="signal" src={renderSignal(signalColor)} alt="sinal" />
+    </div>
+  );
+}
+
+const mapStateToProps = (state) => ({
+  signalColor: state.signal.color,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeSignal: (color) => dispatch(changeSignal(color)),
+});
+
+TrafficSignal.propTypes = {
+  signalColor: string.isRequired,
+  changeSignal: func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrafficSignal);
 ```
 
 </details>

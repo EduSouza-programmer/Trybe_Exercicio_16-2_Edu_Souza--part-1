@@ -21,7 +21,7 @@ const renderSignal = (signalColor) => {
 
 function TrafficSignal({ signalColor, changeSignal }) {
   return (
-    <div>
+    <div className="ctn">
       <div className="button-container">
         <button onClick={() => changeSignal('red')} type="button">
           Red
