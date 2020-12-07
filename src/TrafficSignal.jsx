@@ -1,10 +1,10 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
+import { changeSignal } from './redux/actionCreators';
 import redSignal from './images/redSignal.jpeg';
 import greenSignal from './images/greenSignal.jpeg';
 import yellowSignal from './images/yellowSignal.jpeg';
-import { changeSignal } from './redux/actionCreators';
 
 const renderSignal = (signalColor) => {
   if (signalColor === 'red') {
